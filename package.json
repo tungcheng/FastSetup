@@ -1,0 +1,11 @@
+{
+  "name": "com.techies.fastsetup",
+  "displayName": "Fast Setup",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "Fast Setup your Unity Project Folders and Packages",
+  "author": {
+    "name": "TungCheng",
+    "url": "https://github.com/tungcheng"
+  }
+}

@@ -1,0 +1,20 @@
+__MyGame
+  - Art
+    - Animation
+    - Material
+    - Model
+    - Sprite
+    - Texture
+  - Audio
+    - Music
+    - Sound
+  - Code
+    - Script
+      - _Common
+      - Gameplay
+      - UI
+    - Shader
+  - Design
+    - Config
+    - Prefab
+    - Scene

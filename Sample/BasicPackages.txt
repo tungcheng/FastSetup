@@ -1,0 +1,11 @@
+# registry <registryName> <url>
+registry openupm https://package.openupm.com
+registry npm https://registry.npmjs.org
+
+# git <packageName> <url>
+git com.dbrizov.naughtyattributes https://github.com/dbrizov/NaughtyAttributes.git#upm
+
+# <registryName> <scope> <packageName> <version>
+openupm com.cysharp.unitask com.cysharp.unitask 2.5.10
+npm com.kyrylokuzyk com.kyrylokuzyk.primetween 1.3.2
+openupm com.yasirkula.ingamedebugconsole com.yasirkula.ingamedebugconsole 1.8.2
