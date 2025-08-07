@@ -18,7 +18,7 @@ namespace Techies
         private static void CreateFolderStructure()
         {
             string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            string fullPath = Path.Combine(Application.dataPath, assetPath.Substring("Assets/".Length));
+            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), assetPath);
 
             if (!File.Exists(fullPath))
             {
