@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +19,13 @@ namespace Techies
             return File.Exists(path) && path.EndsWith(".txt");
         }
 
+        [MenuItem("Assets/FastSetup/Overwrite Packages manifest file", true)]
+        private static bool ValidateOverwritePackagesManifest()
+        {
+            string path = AssetDatabase.GetAssetPath(Selection.activeObject);
+            return File.Exists(path) && path.EndsWith(".json");
+        }
+
         class RegistryInfo
         {
             public string name;
@@ -26,8 +35,9 @@ namespace Techies
         [MenuItem("Assets/FastSetup/Import Packages from file")]
         public static void ImportFromText()
         {
+            string projectPath = Directory.GetCurrentDirectory();
             string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), assetPath);
+            string fullPath = Path.Combine(projectPath, assetPath);
 
             if (!File.Exists(fullPath))
             {
@@ -36,7 +46,7 @@ namespace Techies
             }
 
             string[] lines = File.ReadAllLines(fullPath);
-            string manifestPath = Path.Combine(Application.dataPath, "../Packages/manifest.json");
+            string manifestPath = Path.Combine(projectPath, "Packages/manifest.json");
 
             var manifest = JObject.Parse(File.ReadAllText(manifestPath));
             JObject dependencies = manifest["dependencies"] as JObject ?? new JObject();
@@ -153,9 +163,85 @@ namespace Techies
             manifest["dependencies"] = dependencies;
             File.WriteAllText(manifestPath, manifest.ToString());
 
-            Debug.Log("✅ Packages and registries imported.");
+            EditorUtility.DisplayDialog
+            (
+                "Success",
+                "manifest.json has been edited successfully.\n" +
+                "Unity will re-resolve packages automatically. If it doesn’t, try closing and reopening the project.",
+                "OK"
+            );
 
             Client.Resolve();
+        }
+
+        [MenuItem("Assets/FastSetup/Overwrite Packages manifest file")]
+        public static void OverwritePackagesManifest()
+        {
+            if (!EditorUtility.DisplayDialog("Overwrite Packages manifest.json?", "Press Yes button will overwrite content of file Packages/manifest.json", "Yes", "No"))
+                return;
+
+            string projectPath = Directory.GetCurrentDirectory();
+            string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+            string fullPath = Path.Combine(projectPath, assetPath);
+
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogError("File not found: " + fullPath);
+                return;
+            }
+
+            string manifestPath = Path.Combine(projectPath, "Packages/manifest.json");
+            string json = File.ReadAllText(fullPath);
+
+            try
+            {
+                // Validate JSON format using JSON.NET (will throw on malformed JSON)
+                JToken parsed = JToken.Parse(json);
+
+                if (parsed.Type != JTokenType.Object)
+                    throw new JsonException("Root JSON must be an object.");
+
+                JObject root = (JObject)parsed;
+                if (root["dependencies"] is not JObject)
+                    throw new JsonException("Expected a 'dependencies' object in the root.");
+
+                string pretty = root.ToString(Formatting.Indented);
+                File.WriteAllText(manifestPath, pretty);
+
+                EditorUtility.DisplayDialog
+                (
+                    "Success",
+                    "manifest.json has been overwritten successfully.\n" +
+                    "Unity will re-resolve packages automatically. If it doesn’t, try closing and reopening the project.",
+                    "OK"
+                );
+
+                Client.Resolve();
+            }
+            catch (JsonReaderException jex)
+            {
+                EditorUtility.DisplayDialog(
+                    "Invalid JSON",
+                    $"The selected file is not valid JSON.\n\n{jex.Message}",
+                    "OK"
+                );
+            }
+            catch (JsonException jex)
+            {
+                EditorUtility.DisplayDialog(
+                    "JSON Validation Failed",
+                    $"The JSON format isn't compatible with a Unity manifest.\n\n{jex.Message}",
+                    "OK"
+                );
+            }
+            catch (Exception ex)
+            {
+                EditorUtility.DisplayDialog(
+                    "Error",
+                    $"Failed to overwrite manifest.json.\n\n{ex.Message}",
+                    "OK"
+                );
+            }
         }
     }
 }
