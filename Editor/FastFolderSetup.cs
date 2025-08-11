@@ -63,6 +63,13 @@ namespace Techies
             }
 
             AssetDatabase.Refresh();
+
+            EditorUtility.DisplayDialog
+            (
+                "Success",
+                "Folder Structure has been created successfully.",
+                "OK"
+            );
         }
 
         private static int CountIndentation(string line)
