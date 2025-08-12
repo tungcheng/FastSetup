@@ -9,7 +9,8 @@ __MyGame
     - Music
     - Sound
   - Code
-    - Script
+    - Editor
+    - Runtime
       - _Common
       - Gameplay
       - UI
