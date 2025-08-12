@@ -29,7 +29,7 @@ Fast Setup your Unity Project Folders and Packages.
    ```
 
 ### Manual Installation
-
+(You can customize sample files and copy-paste when setup new project)
 1. Download the latest release from [Releases](https://github.com/tungcheng/FastSetup/releases)
 2. Extract the package to your project's `Packages` folder
 3. Unity will automatically import the package
