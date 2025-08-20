@@ -55,107 +55,85 @@ namespace Techies
             var registries = new Dictionary<string, RegistryInfo>();
             var scopesByRegistry = new Dictionary<string, HashSet<string>>();
 
+            JObject GetRegistry(string name)
+            {
+                var existing = scopedRegistries.FirstOrDefault(r => r["name"]?.ToString().ToLower() == name) as JObject;
+                var registry = existing ?? new JObject
+                {
+                    ["name"] = name,
+                    ["url"] = "undefined",
+                    ["scopes"] = new JArray()
+                };
+                if (existing == null)
+                    scopedRegistries.Add(registry);
+                return registry;
+            }
+
+            JObject AddRegistry(string name, string url)
+            {
+                var registry = GetRegistry(name);
+                registry["url"] = url;
+                return registry;
+            }
+
+            JObject AddScope(string name, string scope)
+            {
+                var registry = GetRegistry(name);
+                
+                var scopes = registry["scopes"].ToObject<List<string>>();
+                if (!scopes.Contains(scope))
+                {
+                    scopes.Add(scope);
+                    registry["scopes"] = JArray.FromObject(scopes);
+                }
+                return registry;
+            }
+
+            string GetScope(string part)
+            {
+                return part.Split('@')[0];
+            }
+
+            var listPackageToAdd = new List<string>();
+
             foreach (string rawLine in lines)
             {
                 string line = rawLine.Trim();
                 if (string.IsNullOrEmpty(line) || line.StartsWith("#")) continue;
 
                 string[] parts = line.Split(' ');
-                if (parts.Length < 3)
-                {
-                    Debug.LogWarning($"Invalid line: {line}");
-                    continue;
-                }
-
                 switch (parts[0])
                 {
-                    case "registry":
-                        {
-                            if (parts.Length != 3)
-                            {
-                                Debug.LogWarning($"Invalid registry line: {line}");
-                                continue;
-                            }
-
-                            string name = parts[1];
-                            string url = parts[2];
-                            registries[name] = new RegistryInfo { name = name, url = url };
-                            break;
-                        }
-
                     case "git":
                         {
-                            if (parts.Length != 3)
-                            {
-                                Debug.LogWarning($"Invalid git line: {line}");
-                                continue;
-                            }
-
-                            string packageName = parts[1];
-                            string gitUrl = parts[2];
-                            dependencies[packageName] = gitUrl;
-                            break;
+                            listPackageToAdd.Add(parts[1]);
+                            continue;
                         }
-
+                    case "openupm":
+                        {
+                            AddRegistry("openupm", "https://package.openupm.com");
+                            AddScope("openupm", GetScope(parts[2]));
+                            listPackageToAdd.Add(parts[2]);
+                            continue;
+                        }
+                    case "npm":
+                        {
+                            AddRegistry("npm", "https://registry.npmjs.org");
+                            AddScope("npm", GetScope(parts[2]));
+                            listPackageToAdd.Add(parts[2]);
+                            continue;
+                        }
+                    case "registry":
+                        {
+                            AddRegistry(parts[1], parts[2]);
+                            continue;
+                        }
                     default:
                         {
-                            // Positional registry package line
-                            if (parts.Length != 4)
-                            {
-                                Debug.LogWarning($"Invalid package line: {line}");
-                                continue;
-                            }
-
-                            string registryName = parts[0];
-                            string scope = parts[1];
-                            string packageName = parts[2];
-                            string version = parts[3];
-
-                            if (!registries.TryGetValue(registryName, out var reg))
-                            {
-                                Debug.LogWarning($"Registry '{registryName}' not defined.");
-                                continue;
-                            }
-
-                            dependencies[packageName] = version;
-
-                            if (!scopesByRegistry.ContainsKey(registryName))
-                                scopesByRegistry[registryName] = new HashSet<string>();
-
-                            scopesByRegistry[registryName].Add(scope);
-                            break;
+                            AddScope(parts[0], GetScope(parts[2]));
+                            listPackageToAdd.Add(parts[2]);
+                            continue;
                         }
-                }
-            }
-
-            // Add/merge scoped registries
-            foreach (var kvp in scopesByRegistry)
-            {
-                var reg = registries[kvp.Key];
-                var newScopes = kvp.Value;
-
-                var existing = scopedRegistries.FirstOrDefault(r =>
-                    r["name"]?.ToString() == reg.name &&
-                    r["url"]?.ToString() == reg.url) as JObject;
-
-                var registryObj = existing ?? new JObject
-                {
-                    ["name"] = reg.name,
-                    ["url"] = reg.url,
-                    ["scopes"] = new JArray(newScopes)
-                };
-
-                var scopes = registryObj["scopes"] as JArray;
-                var scopeSet = new HashSet<string>(scopes.Select(s => s.ToString()));
-                foreach (var s in newScopes)
-                {
-                    if (!scopeSet.Contains(s))
-                        scopes.Add(s);
-                }
-
-                if (existing == null)
-                {
-                    scopedRegistries.Add(registryObj);
                 }
             }
 
@@ -171,7 +149,7 @@ namespace Techies
                 "OK"
             );
 
-            Client.Resolve();
+            Client.AddAndRemove(listPackageToAdd.ToArray(), null);
         }
 
         [MenuItem("Assets/FastSetup/Overwrite Packages manifest file")]

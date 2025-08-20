@@ -1,20 +1,18 @@
-# add registry here
+# openupm is added by default
+# npm is added by default
+# add new with format below
 # registry <registryName> <url>
-registry openupm https://package.openupm.com
-registry npm https://registry.npmjs.org
 
 # add package from git repo
-# git <packageName> <url>
+# git <url>
+git https://github.com/dbrizov/NaughtyAttributes.git#upm
+git https://github.com/mfragger/TagsAndLayersGenerator.git
+git https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools
+git https://github.com/UnityCommunity/UnitySingleton.git
 
-git com.dbrizov.naughtyattributes https://github.com/dbrizov/NaughtyAttributes.git#upm
-git com.barelyastudio.tagsandlayersgenerator https://github.com/mfragger/TagsAndLayersGenerator.git
-git com.annulusgames.u-pools https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools
-git com.unitycommunity.unitysingleton https://github.com/UnityCommunity/UnitySingleton.git
+# add package from OpenUPM
+openupm add jp.hadashikick.vcontainer
+openupm add com.cysharp.unitask
 
-# add package from registry
-# <registryName> <scope> <packageName> <version>
-
-openupm com.cysharp.unitask com.cysharp.unitask 2.5.10
-openupm com.yasirkula.ingamedebugconsole com.yasirkula.ingamedebugconsole 1.8.2
-
-npm com.kyrylokuzyk com.kyrylokuzyk.primetween 1.3.2
+# add package from NPM
+npm i com.kyrylokuzyk.primetween
