@@ -1,0 +1,29 @@
+# Collection of free tools that new project should have
+
+# Object Pool
+git https://github.com/AnnulusGames/uPools.git?path=/Assets/uPools
+
+# Singleton
+git https://github.com/UnityCommunity/UnitySingleton.git
+
+# Tween
+npm i com.kyrylokuzyk.primetween
+
+# PlayerPrefs Editor
+openupm add com.sabresaurus.playerprefseditor
+
+# Tags and Layers auto-gen
+git https://github.com/mfragger/TagsAndLayersGenerator.git
+
+# Inspector extension
+openupm add com.dbrizov.naughtyattributes
+openupm add com.eflatun.scenereference
+
+# Debug Helper
+openupm add com.yasirkula.ingamedebugconsole
+
+# Dependency Injection
+openupm add jp.hadashikick.vcontainer
+
+# Async/Await
+openupm add com.cysharp.unitask
