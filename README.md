@@ -83,17 +83,17 @@ __MyGame
 - You can also create your own files from these templates.
 
 ### Create Folders with predefined structure
-1. Right-click on your folder structure .txt file (or use Sample/FolderStructure.txt)
+1. Right-click on your folder structure .txt file
 2. Select `FastSetup/Create Folder Structure from file`
 3. Wait for the success dialog
 
 ### Import packages
-1. Right-click on your packages list .txt file (or use Sample/BasicPackages.txt)
+1. Right-click on your packages list .txt file
 2. Select `FastSetup/Import Packages from file`
 3. Wait for the success dialog
 
 ### Overwrite packages
-1. Right-click on your custom packages .json file (or use Sample/OverwriteManifest.json)
+1. Right-click on your custom packages .json file
 2. Select `FastSetup/Overwrite Packages manifest file`
 3. Confirm that your existing packages setup will be overwritten
 4. The packages manifest file will be overwritten
