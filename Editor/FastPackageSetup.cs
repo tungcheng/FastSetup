@@ -15,15 +15,23 @@ namespace Techies
         [MenuItem("Assets/FastSetup/Import Packages from file", true)]
         private static bool ValidateImportFromText()
         {
-            string path = AssetDatabase.GetAssetPath(Selection.activeObject);
+            string path = GetSelectObjectPath();
             return File.Exists(path) && path.EndsWith(".txt");
         }
 
         [MenuItem("Assets/FastSetup/Overwrite Packages manifest file", true)]
         private static bool ValidateOverwritePackagesManifest()
         {
-            string path = AssetDatabase.GetAssetPath(Selection.activeObject);
+            string path = GetSelectObjectPath();
             return File.Exists(path) && path.EndsWith(".json");
+        }
+
+        static string GetSelectObjectPath()
+        {
+            string projectPath = Directory.GetCurrentDirectory();
+            string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+            string fullPath = Path.Combine(projectPath, assetPath);
+            return fullPath;
         }
 
         class RegistryInfo
@@ -221,5 +229,6 @@ namespace Techies
                 );
             }
         }
+
     }
 }

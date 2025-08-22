@@ -10,8 +10,9 @@ namespace Techies
         [MenuItem("Assets/FastSetup/Create Folder Structure from file", true)]
         private static bool ValidateCreateFolderStructure()
         {
-            string path = AssetDatabase.GetAssetPath(Selection.activeObject);
-            return File.Exists(path) && path.EndsWith(".txt");
+            string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), assetPath);
+            return File.Exists(fullPath) && fullPath.EndsWith(".txt");
         }
 
         [MenuItem("Assets/FastSetup/Create Folder Structure from file")]
