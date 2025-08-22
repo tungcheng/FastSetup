@@ -5,18 +5,18 @@
 Fast Setup for your Unity Project Folders and Packages.
 
 ## Features
-- 🚀 Create new folders inside your project Assets following the structure you prefer
+- 🚀 Create new folders inside your project Assets following your preferred structure
 - 🛠️ Quickly add multiple packages at once
 - ✍️ Overwrite your template packages manifest.json
-- 🌭 Add ScriptTemplates folder to have more choice when create new script file
+- 🌭 Add ScriptTemplates folder to have more choices when creating new script files
 
-## Designed to share
+## Designed to Share
 - 📱 Share your folder structure in an easy-to-read format
 - 🍕 Share your favorite must-have packages with anyone
 - 📩 Share your template packages manifest.json customized by game genre
-- 🎁 Share your script templates that tailored for many file types
+- 🎁 Share your script templates tailored for many file types
 
-## FastSetup add package example file
+## FastSetup Add Package Example File
 ```
 # openupm is added by default
 # npm is added by default
@@ -38,7 +38,7 @@ openupm add com.cysharp.unitask
 npm i com.kyrylokuzyk.primetween
 ```
 
-## FastSetup folder structure example file
+## FastSetup Folder Structure Example File
 ```
 __MyGame
   - Art
@@ -84,17 +84,17 @@ __MyGame
 - Please check my template setup in the **"Sample"** folder. There are some good resources based on my experience. 
 - You can also create your own files from these templates.
 
-### Create Folders with predefined structure
+### Create Folders with Predefined Structure
 1. Right-click on your folder structure .txt file
 2. Select `FastSetup/Create Folder Structure from file`
 3. Wait for the success dialog
 
-### Import packages
+### Import Packages
 1. Right-click on your packages list .txt file
 2. Select `FastSetup/Import Packages from file`
 3. Wait for the success dialog
 
-### Overwrite packages
+### Overwrite Packages
 1. Right-click on your custom packages .json file
 2. Select `FastSetup/Overwrite Packages manifest file`
 3. Confirm that your existing packages setup will be overwritten
@@ -104,7 +104,7 @@ __MyGame
 1. Right-click on your custom script templates folder (or `FastSetup/ScriptTemplates`)
 2. Select `FastSetup/Copy script templates folder`
 3. Copy script templates folder
-4. Your Unity will be closed. Reopen your project and you will find new option inside `Create` menu.
+4. Your Unity will close. Reopen your project and you will find new options in the `Create` menu.
 
 ---
-Thanks [annulusgames](https://github.com/annulusgames/unity-script-templates) for the script templates folder.
+Thanks to [annulusgames](https://github.com/annulusgames/unity-script-templates) for the script templates folder.
