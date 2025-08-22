@@ -107,4 +107,4 @@ __MyGame
 4. Your Unity will be closed. Reopen your project and you will find new option inside `Create` menu.
 
 ---
-**Made with ❤️ for the Unity community**
+Thanks [annulusgames](https://github.com/annulusgames/unity-script-templates) for the script templates folder.
