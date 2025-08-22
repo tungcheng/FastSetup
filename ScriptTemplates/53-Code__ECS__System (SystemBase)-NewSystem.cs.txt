@@ -1,0 +1,28 @@
+using Unity.Burst;
+using Unity.Entities;
+using Unity.Jobs;
+using Unity.Mathematics;
+
+    #ROOTNAMESPACEBEGIN#
+[BurstCompile]
+public partial class #SCRIPTNAME# : SystemBase
+{
+    [BurstCompile]
+    protected override void OnCreate()
+    {
+        #NOTRIM#
+    }
+
+    [BurstCompile]
+    protected override void OnUpdate()
+    {
+        #NOTRIM#
+    }
+
+    [BurstCompile]
+    protected override void OnDestroy()
+    {
+        #NOTRIM#
+    }
+}
+#ROOTNAMESPACEEND#

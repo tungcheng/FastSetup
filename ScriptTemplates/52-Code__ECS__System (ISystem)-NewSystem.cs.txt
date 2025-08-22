@@ -1,0 +1,28 @@
+using Unity.Burst;
+using Unity.Entities;
+using Unity.Jobs;
+using Unity.Mathematics;
+
+    #ROOTNAMESPACEBEGIN#
+[BurstCompile]
+public partial struct #SCRIPTNAME# : ISystem
+{
+    [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        #NOTRIM#
+    }
+
+    [BurstCompile]
+    public void OnUpdate(ref SystemState state)
+    {
+        #NOTRIM#
+    }
+
+    [BurstCompile]
+    public void OnDestroy(ref SystemState state)
+    {
+        #NOTRIM#
+    }
+}
+#ROOTNAMESPACEEND#
