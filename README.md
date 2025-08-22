@@ -8,11 +8,13 @@ Fast Setup for your Unity Project Folders and Packages.
 - 🚀 Create new folders inside your project Assets following the structure you prefer
 - 🛠️ Quickly add multiple packages at once
 - ✍️ Overwrite your template packages manifest.json
+- 🌭 Add ScriptTemplates folder to have more choice when create new script file
 
 ## Designed to share
 - 📱 Share your folder structure in an easy-to-read format
 - 🍕 Share your favorite must-have packages with anyone
 - 📩 Share your template packages manifest.json customized by game genre
+- 🎁 Share your script templates that tailored for many file types
 
 ## FastSetup add package example file
 ```
@@ -97,6 +99,12 @@ __MyGame
 2. Select `FastSetup/Overwrite Packages manifest file`
 3. Confirm that your existing packages setup will be overwritten
 4. The packages manifest file will be overwritten
+
+### Add Script Templates
+1. Right-click on your custom script templates folder (or `FastSetup/ScriptTemplates`)
+2. Select `FastSetup/Copy script templates folder`
+3. Copy script templates folder
+4. Your Unity will be closed. Reopen your project and you will find new option inside `Create` menu.
 
 ---
 **Made with ❤️ for the Unity community**
