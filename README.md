@@ -61,6 +61,16 @@ __MyGame
     - Scene
 ```
 
+## FastSetup Scripts Structure Example File
+```
+Assets/__MyGame/Code/Runtime/UI/GUIMenu.cs
+Assets/__MyGame/Code/Runtime/UI/SettingsPanel.cs
+Assets/__MyGame/Code/Runtime/Gameplay/PlayerController.cs
+Assets/__MyGame/Code/Runtime/Gameplay/EnemyAI.cs
+# This is a comment
+Assets/__MyGame/Code/Runtime/Data/GameConfig.cs
+```
+
 ## Installation
 ### Via Package Manager
 1. Open Unity Package Manager (Window → Package Manager)
