@@ -19,11 +19,20 @@ git https://github.com/mfragger/TagsAndLayersGenerator.git
 openupm add com.dbrizov.naughtyattributes
 openupm add com.eflatun.scenereference
 
+# Inspector extension (more complicate)
+git https://github.com/annulusgames/Alchemy.git?path=/Alchemy/Assets/Alchemy
+
 # Debug Helper
 openupm add com.yasirkula.ingamedebugconsole
 
 # Dependency Injection
+git https://github.com/JanikHelbig/TinyContainer.git?path=Assets/TinyContainer
+
+# Dependency Injection (more complicate)
 openupm add jp.hadashikick.vcontainer
 
 # Async/Await
 openupm add com.cysharp.unitask
+
+# Event
+git https://github.com/gwiazdorrr/EventBetter.git
